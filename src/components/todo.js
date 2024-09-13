@@ -34,7 +34,7 @@ function Todo(props) {
                 <div>
                     <h3 class={`text-lg font-bold text-gray-900 mb-2 ${filteredTodo.isCompleted ? 'line-through' : ''}`}>{filteredTodo.title}</h3>
                 </div>
-                <p class={`text-black mb-2 h-12 max-h-12 w-80 max-w-80 ${filteredTodo.isCompleted ? 'line-through' : ''}`}>{filteredTodo.description}</p>
+                <p class={`text-black mb-2 h-12 max-h-12 max-w-80 ${filteredTodo.isCompleted ? 'line-through' : ''}`}>{filteredTodo.description}</p>
                 <p className='text-black font-bold mb-4'>Status: <span className='font-normal'>{filteredTodo.isCompleted ? 'Completed' : 'Not Completed'}</span></p>
                 <div className='flex justify-between items-center'>
                     <div class="flex items-center gap-3">

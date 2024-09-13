@@ -104,7 +104,7 @@ function TodoApp() {
         <div className="sm:container mx-auto mobiles:mx-0">
           <div className="flex items-center justify-between mobiles:justify-between mobiles:pr-5 sm:pr-5 mobiles:items-start">
             <div className="flex flex-col mobiles:flex-col mobiles:mt-2 mobiles:gap-4 sm:flex-row justify-between px-5 pt-5 my-10 gap-20 items-center">
-              <h1 className={`text-3xl ${bodyColor == 'black' ? 'text-neutral-400' : 'text-black'} mobiles:text-xl`}>My ToDo App</h1>
+              <h1 className={`text-3xl ${bodyColor == 'black' ? 'text-neutral-400' : 'text-black'} mobiles:text-3xl text-left`}>My ToDo App</h1>
               <div className="sm:flex flex-row gap-4">
                 <input
                   ref={searchInput}
@@ -128,7 +128,7 @@ function TodoApp() {
                     </svg>
                   </span>
                 </div>
-                <div onClick={toggleDarkMode} className={`cursor-pointer flex items-center w-80 flex justify-center items-center text-center rounded-full ${bodyColor == 'black' ? 'border border-neutral-400 border-1' : 'border border-black border-1'}`}>
+                <div onClick={toggleDarkMode} className={`cursor-pointer flex items-center w-80 flex justify-center items-center text-center rounded-full ${bodyColor == 'black' ? 'border border-neutral-400 border-1' : 'border border-black border-1'} mobiles:w-28 py-1 mt-4`}>
                   <Image src='/dark.png' alt="dark-mode" height={20} width={20} className={`${bodyColor == 'black' ? '' : 'filter invert'}`} />
                   <span className={`ml-2 text-sm ${bodyColor == 'black' ? 'text-neutral-400' : 'text-black'}`}>{bodyColor == 'black' ? 'Light Mode' : 'Dark Mode'}</span>
                 </div>
