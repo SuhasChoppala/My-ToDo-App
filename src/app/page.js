@@ -129,7 +129,7 @@ function TodoApp() {
                   </span>
                 </div>
                 <div onClick={toggleDarkMode} className={`cursor-pointer flex items-center w-80 flex justify-center items-center text-center rounded-full ${bodyColor == 'black' ? 'border border-neutral-400 border-1' : 'border border-black border-1'}`}>
-                  <i className={`fa-solid fa-moon rounded-full ${bodyColor == 'black' ? 'text-neutral-400' : 'text-black'}`}></i>
+                  <Image src='/dark.png' alt="dark-mode" height={20} width={20} className={`${bodyColor == 'black' ? '' : 'filter invert'}`} />
                   <span className={`ml-2 text-sm ${bodyColor == 'black' ? 'text-neutral-400' : 'text-black'}`}>{bodyColor == 'black' ? 'Light Mode' : 'Dark Mode'}</span>
                 </div>
 
