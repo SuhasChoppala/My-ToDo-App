@@ -1,31 +1,34 @@
 import { useState } from 'react'
+import { useContext } from 'react';
+import TodoContext from '../services/todoContext';
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
-import TodoContext from '../services/todoContext';
-import { useContext } from 'react';
+
 
 
 function DeleteTodo(props) {
 
     const { filteredTodo, setIsDeleteModalVisible } = props;
     const { removeTodo } = useContext(TodoContext);
-    const confirmDelete = (todoId) => {
-        removeTodo(todoId);
+    const context = useContext(TodoContext);
+
+
+    const confirmDelete = () => {
+        console.log(context);
+        removeTodo(filteredTodo.id);
         setIsDeleteModalVisible(false);
     }
-
-
 
     const [open, setOpen] = useState(true)
     return (
         <Dialog open={open} onClose={setOpen} className="relative z-10">
             <DialogBackdrop
                 transition
-                className="fixed inset-0 bg-stone-900 bg-opacity-75 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in"
+                className="fixed inset-0 bg-stone-900 bg-opacity-95 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in"
             />
 
             <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-                <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0 mobiles:flex justify-center items-center">
                     <DialogPanel
                         transition
                         className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-full sm:max-w-lg data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95"
@@ -51,7 +54,7 @@ function DeleteTodo(props) {
                         <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                             <button
                                 type="button"
-                                onClick={() => confirmDelete(filteredTodo.id)}
+                                onClick={confirmDelete}
                                 className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
                             >
                                 Confirm Delete

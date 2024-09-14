@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import TodoContext from "../services/todoContext";
+import CreateTodo from '../components/createTodo';
 import Todo from "../components/todo";
 import { useRef } from "react";
 import Image from "next/image";
-import CreateTodo from '../components/createTodo';
 
 function TodoApp() {
   const [todos, setTodos] = useState([
@@ -14,7 +14,7 @@ function TodoApp() {
       title: "Buy groceries",
       description: "Pick up milk, eggs, and bread from the store.",
       bgColor: "bg-amber-200",
-      isCompleted: true
+      isCompleted: false
     },
     {
       id: 2,
@@ -28,7 +28,7 @@ function TodoApp() {
       title: "Workout",
       description: "Go for a 30-minute run and do strength training.",
       bgColor: "bg-indigo-300",
-      isCompleted: true
+      isCompleted: false
     },
     {
       id: 4,
@@ -42,7 +42,7 @@ function TodoApp() {
       title: "Call parents",
       description: "Catch up with mom and dad this evening.",
       bgColor: "bg-orange-300",
-      isCompleted: true
+      isCompleted: false
     },
     {
       id: 6,
@@ -88,6 +88,8 @@ function TodoApp() {
     } else if (selectedFilter === 'notCompleted') {
       const temp = todos.filter(todo => todo.isCompleted == false);
       setFilteredTodos(temp);
+    } else if (selectedFilter === 'all') {
+      setFilteredTodos(todos);
     }
   }
 
@@ -104,21 +106,22 @@ function TodoApp() {
         <div className="sm:container mx-auto mobiles:mx-0">
           <div className="flex items-center justify-between mobiles:justify-between mobiles:pr-5 sm:pr-5 mobiles:items-start">
             <div className="flex flex-col mobiles:flex-col mobiles:mt-2 mobiles:gap-4 sm:flex-row justify-between px-5 pt-5 my-10 gap-20 items-center">
-              <h1 className={`text-3xl ${bodyColor == 'black' ? 'text-neutral-400' : 'text-black'} mobiles:text-3xl text-left`}>My ToDo App</h1>
-              <div className="sm:flex flex-row gap-4">
+              <h1 className={`text-3xl ${bodyColor == 'black' ? 'text-neutral-400' : 'text-black font-semibold'} mobiles:text-[31px] text-left`}>My ToDo App</h1>
+              <div className="sm:flex flex-row gap-4 items-center">
                 <input
                   ref={searchInput}
                   onChange={(searchInput) => searchTodos(searchInput.currentTarget.value)}
                   placeholder="Search task"
-                  className={`w-full ${bodyColor == 'black' ? 'bg-black border border-neutral-700 text-neutral-400 font-extralight' : 'bg-white border border-black text-black font-normal'} px-3 py-0.5 rounded mobiles:w-full mobiles:px-1 py-1 h-8`}
+                  className={`w-full ${bodyColor == 'black' ? 'bg-black border border-neutral-700 text-neutral-400 font-extralight' : 'bg-white border border-black text-black font-normal'} px-3 py-0.5 rounded mobiles:w-full mobiles:mt-3.5 mobiles:px-1.5 pb-2 py-1 h-8`}
                 />
 
                 <div className="relative w-full mobiles:mt-4">
                   <select
                     ref={sortTodosByFilter}
                     onChange={(sortTodosByFilter) => sortTodos(sortTodosByFilter.currentTarget.value)}
-                    className={` w-full ${bodyColor == 'black' ? 'bg-black border border-neutral-700 text-neutral-400 font-extralight' : 'bg-white border border-black text-black font-normal'} px-3 py-0.5 rounded mobiles:w-full mobiles:px-1 h-8 font-extralight pr-10 appearance-none`}>
+                    className={`w-full ${bodyColor == 'black' ? 'bg-black border border-neutral-700 text-neutral-400 font-extralight' : 'bg-white border border-black text-black font-normal'} px-3 py-0.5 rounded mobiles:w-full mobiles:px-1.5 h-8 font-extralight pr-10 appearance-none`}>
                     <option value="" disabled selected hidden>Filter</option>
+                    <option className="hover:bg-red-500" value='all'>All</option>
                     <option className="hover:bg-red-500" value='completed'>Completed</option>
                     <option className="hover:bg-red-500" value='notCompleted'>Not Completed</option>
                   </select>
@@ -128,27 +131,34 @@ function TodoApp() {
                     </svg>
                   </span>
                 </div>
-                <div onClick={toggleDarkMode} className={`cursor-pointer flex items-center w-80 flex justify-center items-center text-center rounded-full ${bodyColor == 'black' ? 'border border-neutral-400 border-1' : 'border border-black border-1'} mobiles:w-28 py-1 mt-4`}>
-                  <Image src='/dark.png' alt="dark-mode" height={20} width={20} className={`${bodyColor == 'black' ? '' : 'filter invert'}`} />
-                  <span className={`ml-2 text-sm ${bodyColor == 'black' ? 'text-neutral-400' : 'text-black'}`}>{bodyColor == 'black' ? 'Light Mode' : 'Dark Mode'}</span>
-                </div>
 
+                <div onClick={toggleDarkMode} className={`cursor-pointer flex items-center w-80 justify-center text-center rounded-full ${bodyColor == 'black' ? 'border border-neutral-400 border-1' : 'border border-black border-1'} mobiles:w-28 py-1 px-1 mobiles:mt-4`}>
+                  <Image src='/dark.png' alt="dark-mode" height={20} width={20} className={`${bodyColor == 'black' ? '' : 'filter invert'}`} />
+                  <span className={`ml-2 text-sm ${bodyColor == 'black' ? 'text-neutral-400' : 'text-black'} mobiles:ml-1`}>{bodyColor == 'black' ? 'Light Mode' : 'Dark Mode'}</span>
+                </div>
               </div>
+
             </div>
-            <div className="flex items-center my-10 pt-5 mobiles:mt-2">
+            <div className="flex items-center my-10 pt-5 mobiles:mt-3.5">
               <button onClick={() => setIsCreateModalVisible(true)}>
-                <Image
+                {bodyColor === 'black' ? <Image
                   src="/add.png"
                   alt="addIcon"
                   width={30}
                   height={30}
-                  className={`${bodyColor === 'white' ? 'filter invert' : ''}`}
-                />
+                /> :
+                  <Image
+                    src="/add-black.png"
+                    alt="addIcon"
+                    width={30}
+                    height={30}
+                    style={{ filter: 'contrast(200%)' }}
+                  />
+                }
               </button>
-
             </div>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6 mobiles:pt-2">
             {filteredTodos.map(filteredTodo => (
               <Todo key={filteredTodo.id} filteredTodo={filteredTodo}></Todo>
             ))}
