@@ -57,6 +57,8 @@ function TodoApp() {
   const [filteredTodos, setFilteredTodos] = useState(todos);
   const [isCreateModalVisible, setIsCreateModalVisible] = useState(false);
   const [bodyColor, setBodyColor] = useState('black');
+  const [selectedFilter, setSelectedFilter] = useState('all');
+
 
   const removeTodo = (id) => {
     setFilteredTodos(filteredTodos.filter(todo => todo.id !== id));
@@ -82,6 +84,7 @@ function TodoApp() {
   }
 
   const sortTodos = (selectedFilter) => {
+    setSelectedFilter(selectedFilter)
     if (selectedFilter === 'completed') {
       const temp = filteredTodos.filter(todo => todo.isCompleted == true);
       setFilteredTodos(temp);
@@ -185,7 +188,9 @@ function TodoApp() {
 
             (<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6 mobiles:pt-2">
               <div className="w-80 flex justify-center items-center xl:w-full">
-                <p className="text-neutral-400 text-center">Nothing here yet, start by adding your first task!</p>
+                {selectedFilter === 'completed' && <p className="text-neutral-400 text-center">No completed tasks</p>}
+                {selectedFilter === 'notCompleted' && <p className="text-neutral-400 text-center">No incomplete tasks</p>}
+                {selectedFilter === 'all' && <p className="text-neutral-400 text-center">Nothing here yet, start by adding your first task!</p>}
               </div>
             </div>)}
 
