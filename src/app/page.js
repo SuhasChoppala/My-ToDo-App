@@ -106,7 +106,7 @@ function TodoApp() {
         <div className="sm:container mx-auto mobiles:mx-0">
           <div className="flex items-center justify-between mobiles:justify-between mobiles:pr-5 sm:pr-5 mobiles:items-start">
             <div className="flex flex-col mobiles:flex-col mobiles:mt-2 mobiles:gap-4 sm:flex-row justify-between px-5 pt-5 items-center">
-              <h1 className={`text-3xl ${bodyColor == 'black' ? 'text-neutral-400' : 'text-black font-semibold'} mobiles:text-[31px] text-left`}>My ToDo App</h1>
+              <h1 className={`text-3xl ${bodyColor == 'black' ? 'text-neutral-400' : 'text-black font-semibold'} mobiles:text-[31px] text-left`}>My Task Trackr</h1>
             </div>
             <div className="flex items-center mobiles:gap-3 sm:gap-5">
               <div className="flex items-center pt-5 mobiles:mt-3.5">
