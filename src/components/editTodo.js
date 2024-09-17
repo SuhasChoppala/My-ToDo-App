@@ -44,14 +44,14 @@ export default function EditTodo(props) {
         <Dialog open={open} onClose={setOpen} className="relative z-10">
             <DialogBackdrop
                 transition
-                className="fixed inset-0 bg-stone-900 bg-opacity-75 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in"
+                className="fixed inset-0 bg-stone-900 bg-opacity-95 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in"
             />
 
             <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
                 <div className="flex min-h-full items-center justify-center p-4 text-center">
                     <DialogPanel
                         transition
-                        className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm"
+                        className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm mobiles:w-80"
                     >
                         <div className="bg-white px-4 py-5 sm:p-6">
                             <div className="flex flex-col items-center space-y-4">
