@@ -64,7 +64,8 @@ function TodoApp() {
   }, [todos, selectedFilter]);
 
   const removeTodo = (id) => {
-    setFilteredTodos(filteredTodos.filter(todo => todo.id !== id));
+    // setFilteredTodos(filteredTodos.filter(todo => todo.id !== id));
+    setTodos(todos.filter(todo => todo.id !== id))
   }
 
   const toggleStatus = (id) => {
@@ -123,7 +124,7 @@ function TodoApp() {
 
   return (
     <div className={`min-h-screen flex justify-center bg-${bodyColor}`}>
-      <TodoContext.Provider value={{ removeTodo, toggleStatus, filteredTodos, setFilteredTodos, setIsCreateModalVisible, editTodo }}>
+      <TodoContext.Provider value={{ removeTodo, toggleStatus, filteredTodos, setFilteredTodos, setIsCreateModalVisible, editTodo, setTodos, todos }}>
 
         <div className="sm:container mx-auto mobiles:mx-0">
           <div className="flex items-center justify-between mobiles:justify-between mobiles:pr-5 sm:pr-5 mobiles:items-start">

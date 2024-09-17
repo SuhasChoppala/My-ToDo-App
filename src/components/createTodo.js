@@ -10,7 +10,7 @@ export default function CreateTodo() {
     const descriptionInput = useRef(null);
     const colorInput = useRef(null);
 
-    const { setFilteredTodos, setIsCreateModalVisible, filteredTodos } = useContext(TodoContext);
+    const { setFilteredTodos, setIsCreateModalVisible, filteredTodos, setTodos, todos } = useContext(TodoContext);
 
     const createTodo = () => {
         const title = titleInput.current.value;
@@ -24,6 +24,7 @@ export default function CreateTodo() {
             isCompleted: false,
         }
         setFilteredTodos([newTodo, ...filteredTodos]);
+        setTodos([newTodo, ...todos]);
         setIsCreateModalVisible(false);
     }
 
