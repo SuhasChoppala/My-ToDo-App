@@ -4,14 +4,40 @@ import { useState, useRef, useContext } from 'react'
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
 import TodoContext from '../services/todoContext';
 
-export default function EditTodo() {
+export default function EditTodo(props) {
     const [open, setOpen] = useState(true);
-    const { setIsEditModalVisible, todoId, filteredTodo } = useContext(TodoContext);
+    const { editTodo } = useContext(TodoContext);
+    const { setIsEditModalVisible, filteredTodo } = props;
+
     const [todo, setTodo] = useState({
         title: filteredTodo.title,
         description: filteredTodo.description,
         color: filteredTodo.bgColor
     });
+
+    const titleInput = useRef(null);
+    const descriptionInput = useRef(null);
+    // const colorInput = useRef(null);
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setTodo((prevTodo) => ({
+            ...prevTodo,
+            [name]: value
+        }));
+    };
+
+
+    const editObj = () => {
+        const editTemp = {
+            id: filteredTodo.id,
+            title: titleInput.current.value,
+            description: descriptionInput.current.value,
+            color: filteredTodo.color
+        }
+        editTodo(editTemp);
+        setIsEditModalVisible(false)
+    }
 
 
     return (
@@ -34,7 +60,10 @@ export default function EditTodo() {
                                         Title
                                     </label>
                                     <input
+                                        ref={titleInput}
                                         value={todo.title}
+                                        onChange={handleInputChange}
+                                        name="title"
                                         id="title"
                                         placeholder="Enter Title"
                                         className="w-full px-4 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring focus:ring-indigo-500"
@@ -46,19 +75,25 @@ export default function EditTodo() {
                                         Description
                                     </label>
                                     <textarea
+                                        ref={descriptionInput}
                                         value={todo.description}
+                                        onChange={handleInputChange}
+                                        name="description"
                                         id="description"
                                         placeholder="Enter Description"
                                         className="w-full px-4 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring focus:ring-indigo-500 resize-none"
                                     />
                                 </div>
 
-                                <div className="w-full">
+                                {/* <div className="w-full">
                                     <label htmlFor="color" className="block text-sm font-medium text-gray-700 mb-1">
                                         Color
                                     </label>
                                     <select
+                                        ref={colorInput}
                                         value={todo.color}
+                                        onChange={handleInputChange}
+                                        name="color"
                                         id="color"
                                         className="w-full px-4 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring focus:ring-indigo-500"
                                         defaultValue=""
@@ -71,13 +106,14 @@ export default function EditTodo() {
                                         <option value="bg-orange-300">Orange</option>
                                         <option value="bg-stone-300">Gray</option>
                                     </select>
-                                </div>
+                                </div> */}
                             </div>
 
 
                         </div>
                         <div className="bg-gray-50 justify-center px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                             <button
+                                onClick={editObj}
                                 type="button"
                                 className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
                             >

@@ -29,7 +29,6 @@ function Todo(props) {
     const { toggleStatus } = useContext(TodoContext);
 
     return (
-        // <TodoContext.Provider value={{ setIsEditModalVisible, filteredTodo, todoId }}>
         <div class={`${filteredTodo.bgColor} ${filteredTodo.isCompleted ? 'opacity-20' : ''} h-52 border-2 border-transparent hover:border-black rounded-lg shadow-lg p-3.5 transition duration-300 transform hover:scale-105`}>
             <div>
                 <h3 class={`text-lg font-bold text-gray-900 mb-2 ${filteredTodo.isCompleted ? 'line-through' : ''}`}>{filteredTodo.title}</h3>
@@ -76,10 +75,9 @@ function Todo(props) {
                 </div>
             </div>
 
-            {isEditModalVisible && <EditTodo />}
+            {isEditModalVisible && <EditTodo setIsEditModalVisible={setIsEditModalVisible} filteredTodo={filteredTodo} />}
 
         </div>
-        // </TodoContext.Provider>
     )
 }
 

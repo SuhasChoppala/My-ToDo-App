@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TodoContext from "../services/todoContext";
 import CreateTodo from '../components/createTodo';
 import Todo from "../components/todo";
@@ -59,13 +59,16 @@ function TodoApp() {
   const [bodyColor, setBodyColor] = useState('black');
   const [selectedFilter, setSelectedFilter] = useState('all');
 
+  useEffect(() => {
+    sortTodos(selectedFilter);
+  }, [todos, selectedFilter]);
 
   const removeTodo = (id) => {
     setFilteredTodos(filteredTodos.filter(todo => todo.id !== id));
   }
 
   const toggleStatus = (id) => {
-    const temp = filteredTodos.map(todo => {
+    const temp = todos.map(todo => {
       if (todo.id == id) {
         return { ...todo, isCompleted: !todo.isCompleted };
       } else {
@@ -73,6 +76,7 @@ function TodoApp() {
       }
     });
     setFilteredTodos(temp);
+    setTodos(temp)
   }
 
   const searchInput = useRef(null);
@@ -83,15 +87,15 @@ function TodoApp() {
     setFilteredTodos(temp);
   }
 
-  const sortTodos = (selectedFilter) => {
-    setSelectedFilter(selectedFilter)
-    if (selectedFilter === 'completed') {
-      const temp = filteredTodos.filter(todo => todo.isCompleted == true);
+  const sortTodos = (filter) => {
+    setSelectedFilter(filter)
+    if (filter === 'completed') {
+      const temp = todos.filter(todo => todo.isCompleted == true);
       setFilteredTodos(temp);
-    } else if (selectedFilter === 'notCompleted') {
+    } else if (filter === 'notCompleted') {
       const temp = todos.filter(todo => todo.isCompleted == false);
       setFilteredTodos(temp);
-    } else if (selectedFilter === 'all') {
+    } else if (filter === 'all') {
       setFilteredTodos(todos);
     }
   }
@@ -100,11 +104,26 @@ function TodoApp() {
     setBodyColor((prevColor) => (prevColor === 'black' ? 'white' : 'black'));
   }
 
+  const editTodo = (editedTemp) => {
+    const updatedTodo = todos.map(todo => {
+      if (todo.id == editedTemp.id) {
+        return { ...todo, ...editedTemp };
+      }
+
+      else {
+        return todo;
+      }
+    })
+
+    setTodos(updatedTodo);
+    setFilteredTodos(updatedTodo);
+  }
+
 
 
   return (
     <div className={`min-h-screen flex justify-center bg-${bodyColor}`}>
-      <TodoContext.Provider value={{ removeTodo, toggleStatus, filteredTodos, setFilteredTodos, setIsCreateModalVisible }}>
+      <TodoContext.Provider value={{ removeTodo, toggleStatus, filteredTodos, setFilteredTodos, setIsCreateModalVisible, editTodo }}>
 
         <div className="sm:container mx-auto mobiles:mx-0">
           <div className="flex items-center justify-between mobiles:justify-between mobiles:pr-5 sm:pr-5 mobiles:items-start">
@@ -186,12 +205,10 @@ function TodoApp() {
               ))}
             </div>) :
 
-            (<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6 mobiles:pt-2">
-              <div className="w-80 flex justify-center items-center xl:w-full">
-                {selectedFilter === 'completed' && <p className="text-neutral-400 text-center">No completed tasks</p>}
-                {selectedFilter === 'notCompleted' && <p className="text-neutral-400 text-center">No incomplete tasks</p>}
-                {selectedFilter === 'all' && <p className="text-neutral-400 text-center">Nothing here yet, start by adding your first task!</p>}
-              </div>
+            (<div className="w-80 flex justify-center items-center xl:w-full">
+              {selectedFilter === 'all' && <p className="text-neutral-400 text-center">Nothing here yet, start by adding your first task!</p>}
+              {selectedFilter === 'completed' && <p className="text-neutral-400 text-center">No completed tasks</p>}
+              {selectedFilter === 'notCompleted' && <p className="text-neutral-400 text-center">No incomplete tasks</p>}
             </div>)}
 
         </div>
