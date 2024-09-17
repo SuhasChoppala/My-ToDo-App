@@ -206,10 +206,16 @@ function TodoApp() {
               ))}
             </div>) :
 
-            (<div className="w-80 flex justify-center items-center xl:w-full">
-              {selectedFilter === 'all' && <p className="text-neutral-400 text-center">Nothing here yet, start by adding your first task!</p>}
-              {selectedFilter === 'completed' && <p className="text-neutral-400 text-center">No completed tasks</p>}
-              {selectedFilter === 'notCompleted' && <p className="text-neutral-400 text-center">No incomplete tasks</p>}
+            (<div className="flex justify-center text-center mt-10">
+              <div className="w-80 flex justify-center text-center items-center xl:w-full">
+                {searchInput.current?.value ? (
+                  <p className="text-neutral-400 text-center">No tasks matching your search.</p>
+                ) : (
+                  selectedFilter === 'all' ? <p className="text-neutral-400 text-center">Nothing here yet, start by adding your first task!</p> :
+                    selectedFilter === 'completed' ? <p className="text-neutral-400 text-center">No completed tasks</p> :
+                      <p className="text-neutral-400 text-center">No incomplete tasks</p>
+                )}
+              </div>
             </div>)}
 
         </div>
