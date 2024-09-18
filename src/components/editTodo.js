@@ -21,10 +21,15 @@ export default function EditTodo(props) {
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
-        setTodo((prevTodo) => ({
-            ...prevTodo,
+        // setTodo((prevTodo) => ({
+        //     ...prevTodo,
+        //     [name]: value
+        // }));
+
+        setTodo({
+            ...todo,
             [name]: value
-        }));
+        })
     };
 
 
