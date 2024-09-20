@@ -8,7 +8,8 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        mobiles: { min: '100px', max: '430px' }, // Custom media query for 100px to 424px
+        mobiles: { min: '100px', max: '430px' },
+        tablets: { min: '768px', max: '1023px' }
       },
       colors: {
         background: "var(--background)",

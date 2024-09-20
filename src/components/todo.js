@@ -34,28 +34,28 @@ function Todo(props) {
                 <h3 class={`text-lg font-bold text-gray-900 mb-2 ${filteredTodo.isCompleted ? 'line-through' : ''}`}>{filteredTodo.title}</h3>
             </div>
             <p class={`text-black mb-2 h-12 max-h-12 max-w-80 ${filteredTodo.isCompleted ? 'line-through' : ''}`}>{filteredTodo.description}</p>
-            <p className='text-black font-bold mb-4'>Status: <span className='font-normal'>{filteredTodo.isCompleted ? 'Completed' : 'Not Completed'}</span></p>
-            <div className='flex justify-between items-center'>
-                <div class="flex items-center gap-3 lg:gap-2">
-                    <button className='relative border border-black p-2 rounded-full transition-transform transform hover:scale-110 hover:bg-black hover:border-transparent hover:shadow-lg flex items-center justify-center group lg:p-0.5 xl:p-2'>
+            <p className='text-black font-bold mb-4 md:mb-2 xl:mb-4'>Status: <span className='font-normal'>{filteredTodo.isCompleted ? 'Completed' : 'Not Completed'}</span></p>
+            <div className='flex justify-between items-center  tablets:flex tablets:flex-col tablets:items-start tablets:gap-y-1 lg:flex lg:flex-col lg:items-start lg:gap-y-1 xl:flex xl:flex-row xl:justify-between xl:items-center'>
+                <div class="flex items-center gap-3 md:gap-2 lg:gap-2">
+                    <button className='relative border border-black p-2 rounded-full transition-transform transform hover:scale-110 hover:bg-black hover:border-transparent hover:shadow-lg flex items-center justify-center group tablets:py-1 tablets:px-1 md:px-2.5 lg:py-1 lg:px-1 xl:p-2'>
                         <Image
                             onClick={() => editTodo(filteredTodo.id)}
                             src="/edit-icon.png"
                             alt="edit"
                             width={20}
                             height={20}
-                            className='transition-transform duration-300 ease-in-out group-hover:opacity-100 group-hover:invert lg:w-4 h-4 xl:w-5 h-5'
+                            className='transition-transform duration-300 ease-in-out group-hover:opacity-100 group-hover:invert lg:w-5 h-5 xl:w-5 h-5'
                         />
                     </button>
                     <button
                         onClick={deleteTodo}
-                        className='relative border border-black p-2 rounded-full transition-transform transform hover:scale-110 hover:bg-black hover:border-transparent hover:shadow-lg flex items-center justify-center group lg:p-0.5 xl:p-2'>
+                        className='relative border border-black p-2 rounded-full transition-transform transform hover:scale-110 hover:bg-black hover:border-transparent hover:shadow-lg flex items-center justify-center group tablets:py-1 tablets:px-1 md:px-2.5 lg:py-1 lg:px-1 xl:p-2'>
                         <Image
                             src="/delete-icon.png"
                             alt="delete"
                             width={20}
                             height={20}
-                            className='transition-transform duration-300 ease-in-out group-hover:opacity-100 group-hover:invert lg:w-4 h-4 xl:w-5 h-5'
+                            className='transition-transform duration-300 ease-in-out group-hover:opacity-100 group-hover:invert lg:w-5 h-5 xl:w-5 h-5'
                         />
                     </button>
 
@@ -64,7 +64,7 @@ function Todo(props) {
                 </div>
                 <div>
                     <label class="inline-flex items-center space-x-2">
-                        <span class="text-black font-semibold">Mark as Completed</span>
+                        <span class="text-black font-semibold tablets:text-sm">Mark as Completed</span>
                         <input
                             onChange={() => toggleStatus(filteredTodo.id)}
                             type="checkbox"
