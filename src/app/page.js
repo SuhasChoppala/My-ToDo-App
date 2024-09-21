@@ -159,7 +159,7 @@ function TodoApp() {
               </div>
             </div>
           </div>
-          <div className="w-full flex px-6 mobiles:gap-3 my-4 pt-3 md:gap-5 lg:w-96">
+          <div className="w-full flex px-6 mobiles:gap-3 my-4 pt-3 md:gap-5 tablets:w-96 lg:w-96">
             <div className="w-1/2">
               <div className="relative w-full">
                 <input
@@ -175,8 +175,6 @@ function TodoApp() {
                   }
                 </span>
               </div>
-
-
             </div>
             <div className="w-1/2">
               <div className="relative w-full">
