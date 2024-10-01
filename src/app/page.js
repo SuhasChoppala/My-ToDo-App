@@ -6,6 +6,7 @@ import CreateTodo from '../components/createTodo';
 import Todo from "../components/todo";
 import { useRef } from "react";
 import Image from "next/image";
+import Alert from "../components/alert";
 
 function TodoApp() {
   const [todos, setTodos] = useState([
@@ -219,6 +220,8 @@ function TodoApp() {
         </div>
 
         {isCreateModalVisible && <CreateTodo />}
+
+        <Alert />
 
       </TodoContext.Provider>
     </div>
