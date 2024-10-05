@@ -127,6 +127,8 @@ function TodoApp() {
     <div className={`min-h-screen flex justify-center bg-${bodyColor}`}>
       <TodoContext.Provider value={{ removeTodo, toggleStatus, filteredTodos, setFilteredTodos, setIsCreateModalVisible, editTodo, setTodos, todos }}>
 
+        <Alert />
+
         <div className="sm:container mx-auto mobiles:mx-0">
           <div className="flex items-center justify-between mobiles:justify-between mobiles:pr-5 sm:pr-5 mobiles:items-start">
             <div className="flex flex-col mobiles:flex-col mobiles:mt-2 mobiles:gap-4 sm:flex-row justify-between px-5 pt-5 items-center">
@@ -220,8 +222,6 @@ function TodoApp() {
         </div>
 
         {isCreateModalVisible && <CreateTodo />}
-
-        <Alert />
 
       </TodoContext.Provider>
     </div>
